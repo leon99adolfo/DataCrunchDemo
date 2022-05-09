@@ -1,0 +1,54 @@
+<div class="w-full flex flex-col">
+    <span class="text-2xl pb-4">LEAD TRENDS</span>
+    <div class="grid grid-cols-4 gap-4">
+        <div class="col-span-3 flex">
+            <apx-chart
+                class="flex-auto w-full h-80"
+                [chart]="chartLeadTrends.chart"
+                [dataLabels]="chartLeadTrends.dataLabels"
+                [grid]="chartLeadTrends.grid"
+                [labels]="chartLeadTrends.labels"
+                [legend]="chartLeadTrends.legend"
+                [series]="chartLeadTrends.series"
+                [states]="chartLeadTrends.states"
+                [stroke]="chartLeadTrends.stroke"
+                [tooltip]="chartLeadTrends.tooltip"
+                [xaxis]="chartLeadTrends.xaxis"
+                [yaxis]="chartLeadTrends.yaxis">
+            </apx-chart>
+        </div>
+        <div>
+            <div class="flex flex-col content-center justify-between py-8 px-8 bg-gray-100 text-secondary h-80">
+                <div class="flex flex-col">
+                    <span class="text-gray-600">CURRENT MONTH (MAR 2022)</span>
+                    <span class="text-xl text-gray-700">{{ dataPanel.currentMonth | currency : 'USD' : 'symbol' : '1.0-0' }}</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-gray-600">PRIOR MONTH DIFERENCE</span>
+                    <div class="flex flex-row items-center">
+                        <span class="text-xl text-gray-700">{{ dataPanel.priorMonth | currency : 'USD' : 'symbol' : '1.0-0' }}</span>
+                        <div class="flex flex-row pl-8 text-xs text-red-600 items-end">
+                            <mat-icon class="text-xs icon-size-16">south</mat-icon>
+                            <span>{{ dataPanel.diffPriorMonth }} %</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-gray-600">MAR 2021 DIFERENCE</span>
+                    <div class="flex flex-row items-center">
+                        <span class="text-xl text-gray-700">{{ dataPanel.priorYear | currency : 'USD' : 'symbol' : '1.0-0' }}</span>
+                        <div class="flex flex-row pl-8 text-xs text-green-600 items-end">
+                            <mat-icon class="text-xs icon-size-16">north</mat-icon>
+                            <span>{{ dataPanel.diffPriorYear }} %</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-gray-600">ROLLING AVERAGE</span>
+                    <span class="text-xl text-gray-700">{{ dataPanel.rollingAverage | currency : 'USD' : 'symbol' : '1.0-0' }}</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

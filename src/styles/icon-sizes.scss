@@ -1,0 +1,13 @@
+@for $index from 0 through 180 {
+    $size: $index * 4;
+    $length: #{$size}px;
+
+    .icon-size-#{$size} {
+        width      : $length !important;
+        height     : $length !important;
+        min-width  : $length !important;
+        min-height : $length !important;
+        font-size  : $length !important;
+        line-height: $length !important;
+    }
+}

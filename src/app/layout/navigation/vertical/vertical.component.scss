@@ -1,0 +1,170 @@
+/* Variables */
+$vertical-navigation-width: 280;
+
+app-vertical {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    top: 0;
+    width: #{$vertical-navigation-width}px;
+    min-width: #{$vertical-navigation-width}px;
+    max-width: #{$vertical-navigation-width}px;
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    z-index: 200;
+
+    /* ----------------------------------------------------------------------------------------------------- */
+    /* @ Navigation Drawer
+    /* ----------------------------------------------------------------------------------------------------- */
+
+    /* Wrapper */
+    .vertical-navigation-wrapper {
+        position: absolute;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 10;
+        background: inherit;
+        box-shadow: inset -1px 0 0 var(--fuse-border);
+
+        /* Content */
+        .vertical-navigation-content {
+            flex: 1 1 auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+    }
+
+
+    /* ----------------------------------------------------------------------------------------------------- */
+    /* @ Navigation Items
+    /* ----------------------------------------------------------------------------------------------------- */
+
+    /* Navigation items common */
+    app-basic-nav-item{
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        user-select: none;
+
+        .vertical-navigation-item-wrapper {
+
+            .vertical-navigation-item {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 10px 16px;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 20px;
+                text-decoration: none;
+                border-radius: 6px;
+
+                .vertical-navigation-item-icon {
+                    margin-right: 16px;
+                }
+            }
+        }
+    }
+
+    app-basic-nav-item{
+
+        > .vertical-navigation-item-wrapper {
+            margin: 0 12px;
+        }
+    }
+
+    app-basic-nav-item {
+        margin-bottom: 4px;
+
+        .vertical-navigation-item {
+            cursor: pointer;
+        }
+    }
+}
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* @ Navigation Items Colors
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* Navigation items common */
+app-basic-nav-item {
+
+    .vertical-navigation-item-wrapper {
+
+        .vertical-navigation-item {
+            color: currentColor;
+
+            .vertical-navigation-item-icon {
+                @apply opacity-60;
+                color: rgb(245 158 11);
+            }
+
+            .vertical-navigation-item-title-wrapper {
+
+                .vertical-navigation-item-title {
+                    @apply opacity-80;
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+/* Aside, Basic, Collapsable */
+app-basic-nav-item {
+
+    > .vertical-navigation-item-wrapper {
+
+        .vertical-navigation-item {
+
+            /* Active state */
+            &:not(.vertical-navigation-item-disabled) {
+
+                &.vertical-navigation-item-active,
+                &.vertical-navigation-item-active-forced {
+                    @apply bg-white bg-opacity-5;
+
+                    .vertical-navigation-item-icon {
+                        @apply opacity-100;
+                    }
+
+                    .vertical-navigation-item-title {
+                        @apply opacity-100;
+                    }
+                }
+            }
+
+            /* Hover state */
+            &:not(.vertical-navigation-item-active-forced):not(.vertical-navigation-item-active):not(.vertical-navigation-item-disabled) {
+
+                &:hover {
+                    @apply bg-white bg-opacity-5;
+
+                    .vertical-navigation-item-icon {
+                        @apply opacity-100;
+                    }
+
+                    .vertical-navigation-item-title,
+                    .vertical-navigation-item-arrow {
+                        @apply opacity-100;
+                    }
+
+                    .vertical-navigation-item-subtitle {
+                        @apply opacity-100 text-sm;
+                    }
+                }
+            }
+        }
+    }
+}

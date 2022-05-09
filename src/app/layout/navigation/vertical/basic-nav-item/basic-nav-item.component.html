@@ -1,0 +1,23 @@
+<!-- Item wrapper -->
+<div class="vertical-navigation-item-wrapper">
+
+    <a class="vertical-navigation-item" *ngIf="item.link"
+        [ngClass]="{'vertical-navigation-item-active-forced': item.active}"
+        [routerLink]="[item.link]"
+        [routerLinkActive]="'vertical-navigation-item-active'"
+        [routerLinkActiveOptions]="{exact: item.exactMatch || false}">
+        <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+</div>
+
+<!-- Item template -->
+<ng-template #itemTemplate>
+    <!-- Icon -->
+    <mat-icon class="vertical-navigation-item-icon material-icons-outlined" *ngIf="item.icon">{{item.icon}}</mat-icon>
+    <!-- Title -->
+    <div class="vertical-navigation-item-title-wrapper">
+        <div class="vertical-navigation-item-title">
+            <span>{{item.title}}</span>
+        </div>
+    </div>
+</ng-template>

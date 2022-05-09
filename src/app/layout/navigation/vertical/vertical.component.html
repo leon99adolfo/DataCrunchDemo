@@ -1,0 +1,17 @@
+<div class="vertical-navigation-wrapper">
+    <!-- Content -->
+    <div class="vertical-navigation-content" #navigationContent>
+        <!-- Content header -->
+        <div class="vertical-navigation-content-header">
+            <ng-content select="[verticalNavContentHeader]"></ng-content>
+        </div>
+
+        <!-- Items -->
+        <ng-container *ngFor="let item of navigation">
+            <!-- Basic -->
+            <app-basic-nav-item *ngIf="item.type === 'basic'" [item]="item" [name]="name"></app-basic-nav-item>
+        </ng-container>
+    </div>
+</div>
+
+
