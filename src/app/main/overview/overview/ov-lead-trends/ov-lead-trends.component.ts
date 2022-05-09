@@ -1,48 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { OverviewService } from '../../overview.service';
 
 @Component({
   selector: 'app-ov-lead-trends',
   templateUrl: './ov-lead-trends.component.html',
   styleUrls: ['./ov-lead-trends.component.scss']
 })
-export class OvLeadTrendsComponent implements OnInit {
+export class OvLeadTrendsComponent implements OnInit, OnDestroy {
 
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
   // variables
   chartLeadTrends: any;
-  labels: string[] = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-  series: any[] = [
-    {
-      name: "2022",
-      data: [1800, 900, 2300, 1800, 2000, 3000, 3209, 2500, 2300, 4000, 4500, 4400]
-    },
-    {
-      name: "2021",
-      data: [2200, 2100, 3100, 4000, 1200, 1300, 2400, 2600, 1500, 2300, 2000, 1800]
-    },
-    {
-      name: "2020",
-      data: [0, 500, 1200, 2000, 800, 750, 700, 1300, 1100, 900, 1300, 1200]
-    },
-    {
-      name: "2019",
-      data: [500, 0, 500, 1000, 0, 900, 200, 300, 600, 300, 1000, 400]
-    }
-  ];
-  dataPanel: any = {
-    currentMonth: 1873,
-    priorMonth: 2309,
-    diffPriorMonth: 23,
-    priorYear: 1474,
-    diffPriorYear: 14,
-    rollingAverage:4596
-  }
+  labels: string[];
+  series: any[];
+  dataPanel: any;
 
-  constructor() { }
+  // Constructor
+  constructor(
+    private _overviewService: OverviewService
+  ) { }
 
+
+  // Events
   ngOnInit(): void {
-    this.processOvLeadTrends();
+    this._overviewService.getLeadTrendsInfo().pipe(takeUntil(this._unsubscribeAll)).subscribe(r => {
+      this.labels = r.labels;
+      this.series = r.series;
+      this.dataPanel = r.dataPanel;
+      this.processOvLeadTrends();
+    });
   }
 
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next('');
+    this._unsubscribeAll.complete();
+  }
+
+  // methdos
   processOvLeadTrends() {
     this.chartLeadTrends = {
       chart: { fontFamily: 'inherit', foreColor: 'inherit', height: '100%', type: 'line', toolbar: { show: false } },
