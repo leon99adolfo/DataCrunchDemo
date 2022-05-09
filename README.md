@@ -18,7 +18,7 @@ In this section I list step by step the approach that I would take to develop an
 
 # Picture
 
-
+![image](https://user-images.githubusercontent.com/5498970/167340240-2803e585-3cdc-44cf-9476-c3398d52ced8.png)
 
 
 # Demo Data Crunch
